@@ -1,0 +1,88 @@
+body {
+	padding-top:1.5rem;
+	padding-bottom:1.5rem;
+}
+
+.header,.marketing,.footer {
+	padding-right:1rem;
+	padding-left:1rem;
+}
+
+.header {
+	padding-bottom:1rem;
+	border-bottom:.05rem solid #e5e5e5;
+}
+
+.header h1 {
+	margin-top:0;
+	margin-bottom:0;
+	line-height:3rem;
+}
+
+.display-3 {
+	font-size:2.8rem;
+}
+
+.rating {
+	margin-top:20px;
+}
+
+.starrr {
+	padding: 20px;
+	line-height: 3.0rem;
+	font-size: 2.8rem;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.starrr a {
+	padding:0 1px;
+	cursor:pointer;
+	color:#FFD119;
+	text-decoration:none;
+}
+
+.footer {
+	padding-top:1.5rem;
+	color:#777;
+	border-top:.05rem solid #e5e5e5;
+}
+
+@media (min-width: 48em) {
+	.container {
+		max-width:46rem;
+	}
+}
+
+.container-narrow > hr {
+	margin:2rem 0;
+}
+
+.jumbotron {
+	text-align:center;
+	border-bottom:.05rem solid #e5e5e5;
+}
+
+.jumbotron .btn {
+	padding:.75rem 1.5rem;
+	font-size:1.5rem;
+}
+
+.marketing p + h4 {
+	margin-top:1.5rem;
+}
+
+@media screen and (min-width: 48em) {
+	.header,.marketing,.footer {
+		padding-right:0;
+		padding-left:0;
+	}
+	
+	.header {
+		margin-bottom:2rem;
+	}
+	
+	.jumbotron {
+		border-bottom:0;
+	}
+}
