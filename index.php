@@ -93,6 +93,7 @@
 	function send_feedback()
 	{
 		global $_POST;
+		global $config;
 		$to			=	$config['email'];
 		$from		=	( isset($_POST['customer_email']) ) ? cleaned($_POST['customer_email'], 'email') : $config['email'];
 		$subject	=	"Customer Feedback - {$_POST['rating']}/5 Star Rating";
