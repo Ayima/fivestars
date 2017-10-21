@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="robots" content="noindex,nofollow,nosnippet,noarchive">
+	<title>[@company] - Customer Ratings</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" type="text/css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link href="views/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="container">
+		<div class="header clearfix">
+			<h1 class="text-muted">[@company]</h1>
+		</div>
+		<form action="index.php" method="post">
+			<div class="jumbotron">
+				<div class="smile"><i class="fa fa-heart-o fa-5"></i></div>
+				<h2 class="display-3">Thank you for letting us know!</h2>
+				<p>We will read your feedback and get back to you as soon as possible to rectify these issues.</p>
+			</div>
+		</form>
+		<div class="marketing">
+			<h3>[@promo_title]</h3>
+			<p>[@promo_content]</p>
+		</div>
+		<footer class="footer">
+			<p>&copy; [@company] 2017</p>
+		</footer>
+	</div>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous" type="text/javascript"></script>
+	<script type="text/javascript" src="views/script.js"></script>
+	<script type="text/javascript">
+		$('.starrr').starrr({
+		  change: function(e, value){
+		    $('#count').text(value);
+		    $("#rating_count").val(value);
+		  }
+		});
+	</script>
+</body>
+</html>

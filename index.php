@@ -8,12 +8,20 @@
 		$min_stars	=	(int)$config['min_stars'];
 		if ( $rating < $min_stars )
 		{
-			$config['rating']			=	( isset($_POST['rating']) ) ? cleaned($_POST['rating'], 'rating') : 0;
-			$config['customer_id']		=	( isset($_POST['customer_id']) ) ? cleaned($_POST['customer_id']) : '';
-			$config['order_id']			=	( isset($_POST['order_id']) ) ? cleaned($_POST['order_id']) : '';
-			$config['customer_name']	=	( isset($_POST['customer_name']) ) ? cleaned($_POST['customer_name'], 'name') : '';
-			$config['customer_email']	=	( isset($_POST['customer_email']) ) ? cleaned($_POST['customer_email'], 'email') : '';
-			print templated('unhappy');
+			if ( isset($_POST['feedback']) )
+			{
+				$email = send_feedback();
+				print templated('unhappy-sent');
+			}
+			else
+			{
+				$config['rating']			=	( isset($_POST['rating']) ) ? cleaned($_POST['rating'], 'rating') : 0;
+				$config['customer_id']		=	( isset($_POST['customer_id']) ) ? cleaned($_POST['customer_id']) : '';
+				$config['order_id']			=	( isset($_POST['order_id']) ) ? cleaned($_POST['order_id']) : '';
+				$config['customer_name']	=	( isset($_POST['customer_name']) ) ? cleaned($_POST['customer_name'], 'name') : '';
+				$config['customer_email']	=	( isset($_POST['customer_email']) ) ? cleaned($_POST['customer_email'], 'email') : '';
+				print templated('unhappy');
+			}
 		}
 		else
 		{
@@ -85,9 +93,16 @@
 	function send_feedback()
 	{
 		global $_POST;
-		$to      = $config['email'];
-		$subject = "Customer Feedback - {$_POST['rating']}/5 Star Rating";
-		$message = $_POST['feedback'];
-		$headers = "From: {$config['email']}\r\nReply-To: {$config['email']}\r\nX-Mailer: Ayima/fivestars";
+		$to			=	$config['email'];
+		$from		=	( isset($_POST['customer_email']) ) ? cleaned($_POST['customer_email'], 'email') : $config['email'];
+		$subject	=	"Customer Feedback - {$_POST['rating']}/5 Star Rating";
+		$vars		=	"\n== Customer Details ==\n";
+		foreach ($_POST as $key => $value)
+		{
+			if ( $key == 'feedback' ) { continue; }
+			$vars	.=	ucwords(str_replace('_', '', $key)).":\t{$value}\n";
+		}
+		$message	=	"\n== Feedback ==\n{$_POST['feedback']}\n{$vars}\n";
+		$headers	=	"From: {$from}\r\nReply-To: {$from}\r\nX-Mailer: Ayima/fivestars";
 		mail($to, $subject, $message, $headers);
 	}
