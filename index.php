@@ -37,6 +37,17 @@
 		}
 		else
 		{
+			$redirect = next_review();
+			if ( isset($redirect['error'] )
+			{
+				print "Error! No Review Sites Configured";
+			}
+			else
+			{
+				$config['redirect_to']		=	$redirect['review_site'];
+				$config['redirect_url']		=	$redirect['review_url'];
+			}
+			save_rating();
 			print templated('happy');
 		}
 	}
@@ -125,3 +136,22 @@
 		fclose($handle);
 	}
 	
+	function next_review()
+	{
+		global $_POST;
+		global $config;
+		
+		$secret_key		=	substr( sha1($config['secret_key'].$config['email']), 0, 10 );
+		$file_name		=	"nextreview-{$secret_key}.txt";
+		$file_path		=	"data/{$file_name}";
+		$review_data	=	explode( "|", file_get_contents($file_path) );
+		if ( $review_data !== FALSE )
+		{
+			return array('review_site' => $review_data[0], 'review_url' => $review_data[1]);
+		}
+		else
+		{
+			return array('error' => 'No review websites set');
+		}
+	}
+
