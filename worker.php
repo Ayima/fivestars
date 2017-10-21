@@ -12,7 +12,18 @@
 		"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0; Trident/5.0)",
 	];
 	
+	$secret_key		=	substr( sha1($config['secret_key'].$config['email']), 0, 10 );
+	$file_name		=	"reviewsites-".date('Y-m')."-{$secret_key}.csv";
+	$file_path		=	"data/{$file_name}";
+	$handle			=	fopen($file_path, "a");
+	if ( filesize($file_path) < 32 )
+	{
+		$field_names = ['Date', 'Time', 'Review Site', 'Average Score', 'Relative Score', 'Review Count'];
+		fputcsv($handle, $field_names);
+	}
+
 	$reviews=array();
+	$worst_relative=array();
 	foreach ($review_sites as $site)
 	{
 		if ( !filter_var($site['scrape_url'], FILTER_VALIDATE_URL) ) { continue; }
@@ -28,7 +39,7 @@
 			$reviews[$site['name']]['rating'] = $stars_data[1];
 			
 			$relative_decimal = $stars_data[1] / $site['max_score'];
-			$relative_percent = $relative_decimal * 100;
+			$relative_percent = round($relative_decimal * 100);
 			
 			$reviews[$site['name']]['relative_rating'] = $relative_percent;
 		}
@@ -38,9 +49,25 @@
 		{
 			$reviews[$site['name']]['count'] = $count_data[1];
 		}
-
+		
+		$data_row = [ date('Y-m-d'), date('H:i:s'), $site['name'], $reviews[$site['name']]['rating'], $reviews[$site['name']]['relative_rating'], $reviews[$site['name']]['count'] ];
+		fputcsv($handle, $data_row);
+		
+		if ( array_key_exists('score', $worst_relative) )
+		{
+			if ( $worst_relative['score'] > $reviews[$site['name']]['relative_rating'] )
+			{
+				$worst_relative = [ 'site' => $site['name'], 'score' => $reviews[$site['name']]['relative_rating'] ];
+			}
+		}
+		else
+		{
+			$worst_relative = [ 'site' => $site['name'], 'score' => $reviews[$site['name']]['relative_rating'] ];
+		}
+		
 	}
-
+	
+	fclose($handle);
 
 	if ( isset($_GET['img']) )
 	{
@@ -50,5 +77,7 @@
 	else
 	{
 		print json_encode($reviews);
+		print json_encode($worst_relative);
 		exit;
 	}
+	
