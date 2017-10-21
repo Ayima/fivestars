@@ -49,6 +49,6 @@
 	}
 	else
 	{
-		return var_dump($reviews);
+		return json_encode($reviews);
 		exit;
 	}
