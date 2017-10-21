@@ -8,11 +8,11 @@
 		$min_stars	=	(int)$config['min_stars'];
 		if ( $rating < $min_stars )
 		{
-			print "Bad Review: {$rating} out of 5 (minimum of {$min_stars}).";
+			print templated('unhappy');
 		}
 		else
 		{
-			print "Good Review: {$rating} out of 5 (minimum of {$min_stars}).";
+			print templated('happy');
 		}
 	}
 	else

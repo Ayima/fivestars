@@ -47,6 +47,20 @@ body {
 	color:#777;
 	border-top:.05rem solid #e5e5e5;
 }
+.smile {
+	text-align: center;
+	font-size: 12.0rem;
+	margin: 0;
+	padding: 0;
+	line-height: 0.5;
+}
+
+.feedbackbox {
+	width: 90%;
+	height: 200px;
+	font-size: 16px;
+	line-height: 20px;
+}
 
 @media (min-width: 48em) {
 	.container {

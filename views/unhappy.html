@@ -16,17 +16,16 @@
 		</div>
 		<form action="index.php" method="post">
 			<div class="jumbotron">
-				<h2 class="display-3">How was your shopping experience with [@company]?</h2>
-				<div class="rating">
-					<div id="stars" class="starrr"></div>
-					<p>You selected a rating of <span id="count">0</span> out of 5 star(s)</p>
-				</div>
+				<div class="smile"><i class="fa fa-frown-o fa-5"></i></div>
+				<h2 class="display-3">What could we do better?</h2>
+				<p>We'd love to learn from our mistakes and right our wrongs.</p>
+				<textarea name="feedback" class="feedbackbox" placeholder="Please type your feedback here..."></textarea>
 				<input type="hidden" name="rating" value="[@rating]" id="rating_count">
 				<input type="hidden" name="customer_id" value="[@customer_id]">
 				<input type="hidden" name="order_id" value="[@order_id]">
 				<input type="hidden" name="customer_name" value="[@customer_name]">
 				<input type="hidden" name="customer_email" value="[@customer_email]">
-				<p><button class="btn btn-lg btn-success" type="submit">Submit Rating</button></p>
+				<p><button class="btn btn-lg btn-primary" type="submit">Submit Feedback</button></p>
 			</div>
 		</form>
 		<div class="marketing">
