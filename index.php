@@ -11,7 +11,7 @@
 			if ( isset($_POST['feedback']) )
 			{
 				$to			=	$config['email'];
-				$from		=	( isset($_POST['customer_email']) ) ? cleaned($_POST['customer_email'], 'email') : $config['email'];
+				$from		=	( $_POST['customer_email'] !== '' ) ? cleaned($_POST['customer_email'], 'email') : $config['email'];
 				$subject	=	"Customer Feedback - {$_POST['rating']}/5 Star Rating";
 				$vars		=	"\n== Customer Details ==\n";
 				foreach ($_POST as $key => $value)
@@ -21,9 +21,6 @@
 				}
 				$message	=	"\n== Feedback ==\n{$_POST['feedback']}\n{$vars}\n";
 				$headers	=	"From: {$from}\r\nReply-To: {$from}\r\nX-Mailer: Ayima/fivestars";
-				
-				//print "To: {$to}\nSubject: {$subject}\nMessage:\n{$message}\nHeaders:\n{$headers}\n"; exit;
-				
 				mail($to, $subject, $message, $headers);
 				print templated('unhappy-sent');
 			}
