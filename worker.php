@@ -27,8 +27,8 @@
 		{
 			$reviews[$site['name']]['rating'] = $stars_data[1];
 			
-			$relative_decimal = (int) $stars_data[1] / (int) $site['max_score'];
-			$relative_percent = (int) $relative_decimal * 100;
+			$relative_decimal = $stars_data[1] / $site['max_score'];
+			$relative_percent = $relative_decimal * 100;
 			
 			$reviews[$site['name']]['relative_rating'] = $relative_percent;
 		}
