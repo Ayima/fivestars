@@ -3,10 +3,12 @@
 	$config	=	[
 		
 		"company"			=>		"Acme Inc", // Your company/website name
+		"email"				=>		"fivestars@ayima.tech", // Your email address (where complaints and ratings are sent)
+		
 		"min_stars"			=>		4, // Minimum number of stars needed to redirect to a review site
 		
-		"promo_title"		=>		"Win a $50 Gift Voucher", // Promo Title - Entice people to rate you
-		"promo_content"		=>		"Simply by rating your shopping experience, we'll enter you into a weekly prize draw with the winner getting a $50 Gift Voucher! Simply give us your rating out of 5 stars above and click <em>Submit Rating</em>.", // Promo Content
+		"promo_title"		=>		"Insert A Headline Here", // Promo Title - Entice people to rate you
+		"promo_content"		=>		"This content can be changed to whatever you wish in the config.php file", // Promo Content
 		
 		
 

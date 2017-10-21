@@ -8,6 +8,11 @@
 		$min_stars	=	(int)$config['min_stars'];
 		if ( $rating < $min_stars )
 		{
+			$config['rating']			=	( isset($_POST['rating']) ) ? cleaned($_POST['rating'], 'rating') : 0;
+			$config['customer_id']		=	( isset($_POST['customer_id']) ) ? cleaned($_POST['customer_id']) : '';
+			$config['order_id']			=	( isset($_POST['order_id']) ) ? cleaned($_POST['order_id']) : '';
+			$config['customer_name']	=	( isset($_POST['customer_name']) ) ? cleaned($_POST['customer_name'], 'name') : '';
+			$config['customer_email']	=	( isset($_POST['customer_email']) ) ? cleaned($_POST['customer_email'], 'email') : '';
 			print templated('unhappy');
 		}
 		else
@@ -46,7 +51,7 @@
 		switch ($type)
 		{
 			case "email" :
-				if ( preg_match("/^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/iD", $data) )
+				if ( filter_var($data, FILTER_VALIDATE_EMAIL) )
 				{
 					return $data;
 				}
@@ -75,4 +80,14 @@
 				return preg_replace("/[^A-Za-z0-9\/\-']/", '', $data);
 			break;
 		}
+	}
+	
+	function send_feedback()
+	{
+		global $_POST;
+		$to      = $config['email'];
+		$subject = "Customer Feedback - {$_POST['rating']}/5 Star Rating";
+		$message = $_POST['feedback'];
+		$headers = "From: {$config['email']}\r\nReply-To: {$config['email']}\r\nX-Mailer: Ayima/fivestars";
+		mail($to, $subject, $message, $headers);
 	}
