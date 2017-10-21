@@ -38,7 +38,7 @@
 		else
 		{
 			$redirect = next_review();
-			if ( isset($redirect['error'] )
+			if ( isset($redirect['error']) )
 			{
 				print "Error! No Review Sites Configured";
 			}
