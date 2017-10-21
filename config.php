@@ -10,6 +10,6 @@
 		"promo_title"		=>		"Insert A Headline Here", // Promo Title - Entice people to rate you
 		"promo_content"		=>		"This content can be changed to whatever you wish in the config.php file", // Promo Content
 		
-		
+		"secret_key"		=>		"Insert a random password/string here", // Used to make your data file URLs unguessable
 
 	];
