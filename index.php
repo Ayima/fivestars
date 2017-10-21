@@ -117,7 +117,7 @@
 			$field_names = ['Date', 'Time', 'Star Rating', 'Customer ID', 'Order ID', 'Customer Name', 'Customer Email', 'Customer IP', 'Redirected To', 'Feedback'];
 			fputcsv($handle, $field_names);
 		}
-		if ( !$config['redirect_to'] ) { $config['redirect_to'] = 'Feedback Form' }
+		if ( !$config['redirect_to'] ) { $config['redirect_to'] = 'Feedback Form'; }
 		if ( !$_POST['feedback'] ) { $_POST['feedback'] = ''; }
 		$data_row = [date('Y-m-d'), date('H:i:s'), $_POST['rating'], $_POST['customer_id'], $_POST['order_id'], $_POST['customer_name'], $_POST['customer_email'], $_SERVER['REMOTE_ADDR'], $config['redirect_to'], $_POST['feedback']];
 		fputcsv($handle, $data_row);
