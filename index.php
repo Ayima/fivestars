@@ -10,7 +10,18 @@
 		{
 			if ( isset($_POST['feedback']) )
 			{
-				$email = send_feedback();
+				$to			=	$config['email'];
+				$from		=	( isset($_POST['customer_email']) ) ? cleaned($_POST['customer_email'], 'email') : $config['email'];
+				$subject	=	"Customer Feedback - {$_POST['rating']}/5 Star Rating";
+				$vars		=	"\n== Customer Details ==\n";
+				foreach ($_POST as $key => $value)
+				{
+					if ( $key == 'feedback' ) { continue; }
+					$vars	.=	ucwords(str_replace('_', '', $key)).":\t{$value}\n";
+				}
+				$message	=	"\n== Feedback ==\n{$_POST['feedback']}\n{$vars}\n";
+				$headers	=	"From: {$from}\r\nReply-To: {$from}\r\nX-Mailer: Ayima/fivestars";
+				mail($to, $subject, $message, $headers);
 				print templated('unhappy-sent');
 			}
 			else
@@ -90,20 +101,3 @@
 		}
 	}
 	
-	function send_feedback()
-	{
-		global $_POST;
-		global $config;
-		$to			=	$config['email'];
-		$from		=	( isset($_POST['customer_email']) ) ? cleaned($_POST['customer_email'], 'email') : $config['email'];
-		$subject	=	"Customer Feedback - {$_POST['rating']}/5 Star Rating";
-		$vars		=	"\n== Customer Details ==\n";
-		foreach ($_POST as $key => $value)
-		{
-			if ( $key == 'feedback' ) { continue; }
-			$vars	.=	ucwords(str_replace('_', '', $key)).":\t{$value}\n";
-		}
-		$message	=	"\n== Feedback ==\n{$_POST['feedback']}\n{$vars}\n";
-		$headers	=	"From: {$from}\r\nReply-To: {$from}\r\nX-Mailer: Ayima/fivestars";
-		mail($to, $subject, $message, $headers);
-	}
