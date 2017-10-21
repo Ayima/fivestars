@@ -17,12 +17,12 @@
 				foreach ($_POST as $key => $value)
 				{
 					if ( $key == 'feedback' ) { continue; }
-					$vars	.=	ucwords(str_replace('_', '', $key)).":\t{$value}\n";
+					$vars	.=	ucwords(str_replace('_', ' ', $key)).":\t{$value}\n";
 				}
 				$message	=	"\n== Feedback ==\n{$_POST['feedback']}\n{$vars}\n";
 				$headers	=	"From: {$from}\r\nReply-To: {$from}\r\nX-Mailer: Ayima/fivestars";
 				
-				print "To: {$to}\nSubject: {$subject}\nMessage:\n{$message}\nHeaders:\n{$headers}\n"; exit;
+				//print "To: {$to}\nSubject: {$subject}\nMessage:\n{$message}\nHeaders:\n{$headers}\n"; exit;
 				
 				mail($to, $subject, $message, $headers);
 				print templated('unhappy-sent');
