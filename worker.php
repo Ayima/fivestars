@@ -4,6 +4,7 @@
 	
 	require_once('config.php');
 
+	$secret_key		=	substr( sha1($config['secret_key'].$config['email']), 0, 10 );
 	$file_name3		=	"expirecache-{$secret_key}.csv";
 	$file_path3		=	"data/{$file_name3}";
 	if ( file_exists($file_path3) == FALSE ) { file_put_contents($file_path3, '1'); }
@@ -18,7 +19,6 @@
 			"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:55.0) Gecko/20100101 Firefox/55.0",
 		];
 
-		$secret_key		=	substr( sha1($config['secret_key'].$config['email']), 0, 10 );
 		$file_name		=	"reviewsites-".date('Y-m')."-{$secret_key}.csv";
 		$file_path		=	"data/{$file_name}";
 		$handle			=	fopen($file_path, "a");
