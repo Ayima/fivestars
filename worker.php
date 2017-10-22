@@ -8,7 +8,7 @@
 	$file_name3		=	"expirecache-{$secret_key}.csv";
 	$file_path3		=	"data/{$file_name3}";
 	if ( file_exists($file_path3) == FALSE ) { file_put_contents($file_path3, '1'); }
-	$last_cache		=	trim( file_get_contents($file_name3) );
+	$last_cache		=	trim( file_get_contents($file_path3) );
 	$min_cache		=	time()-43200;
 	if ($last_cache <= $min_cache)
 	{
