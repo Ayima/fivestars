@@ -12,6 +12,7 @@
 	$min_cache		=	time()-43200;
 	if ($last_cache <= $min_cache)
 	{
+		$run = TRUE;
 		$user_agents		=	[
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
 			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
@@ -101,6 +102,13 @@
 	}
 	else
 	{
-		//echo json_encode($reviews)."\n".json_encode($worst_relative);
+		if ( isset($run) && $run == TRUE )
+		{
+			print "Success";
+		}
+		else
+		{
+			print "Too Soon";
+		}
 		exit;
 	}
