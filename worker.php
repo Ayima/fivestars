@@ -5,7 +5,7 @@
 	require_once('config.php');
 
 	$secret_key		=	substr( sha1($config['secret_key'].$config['email']), 0, 10 );
-	$file_name3		=	"expirecache-{$secret_key}.csv";
+	$file_name3		=	"expirecache-{$secret_key}.txt";
 	$file_path3		=	"data/{$file_name3}";
 	if ( file_exists($file_path3) == FALSE ) { file_put_contents($file_path3, '1'); }
 	$last_cache		=	trim( file_get_contents($file_path3) );
@@ -83,7 +83,7 @@
 			}
 		}
 	
-		$file_name2		=	"nextreview-{$secret_key}.csv";
+		$file_name2		=	"nextreview-{$secret_key}.txt";
 		$file_path2		=	"data/{$file_name2}";
 		$handle2 = fopen($file_path2, 'w');
 		fwrite($handle2, $worst_relative['site']."|".$review_url);
