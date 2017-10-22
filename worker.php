@@ -9,7 +9,6 @@
 		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
 		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38",
 		"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:55.0) Gecko/20100101 Firefox/55.0",
-		"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0; Trident/5.0)",
 	];
 	
 	$secret_key		=	substr( sha1($config['secret_key'].$config['email']), 0, 10 );
@@ -68,6 +67,20 @@
 	}
 	
 	fclose($handle);
+
+	foreach ($review_sites as $get_url)
+	{
+		if ( $get_url['name'] == $worst_relative['name'] )
+		{
+			$review_url = $get_url['write_url'];
+		}
+	}
+
+	$file_name2		=	"nextreview-{$secret_key}.csv";
+	$file_path2		=	"data/{$file_name2}";
+	$handle2 = fopen($file_path2, 'w');
+	fwrite($handle2, $worst_relative['name']."|".$review_url);
+	fclose($handle2);
 
 	if ( isset($_GET['img']) )
 	{
