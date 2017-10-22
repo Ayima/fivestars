@@ -86,7 +86,7 @@
 		$file_name2		=	"nextreview-{$secret_key}.csv";
 		$file_path2		=	"data/{$file_name2}";
 		$handle2 = fopen($file_path2, 'w');
-		fwrite($handle2, $worst_relative['name']."|".$review_url);
+		fwrite($handle2, $worst_relative['site']."|".$review_url);
 		fclose($handle2);
 		
 		$handle3 = fopen($file_path3, 'w');
