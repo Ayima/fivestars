@@ -36,7 +36,7 @@
 		
 		[
 			"name"			=>		"DesignMyNight",
-			"write_url"		=>		"https://www.designmynight.com/london/pubs/city-of-london/old-red-cow", // URL to write review. e.g. for Google: https://support.google.com/business/answer/7035772?hl=en-GB
+			"write_url"		=>		"https://www.designmynight.com/london/pubs/city-of-london/old-red-cow#!#reviews", // URL to write review. e.g. for Google: https://support.google.com/business/answer/7035772?hl=en-GB
 			"scrape_url"	=>		"https://www.designmynight.com/london/pubs/city-of-london/old-red-cow", // URL to scrape star rating and count
 			"max_score"		=>		5, // The maximum score/star rating on this review site (normally 5)
 			"stars_regex"	=>		"/itemprop.*?=[\"' ]*?ratingValue[\"' ]*?content[\"' ]*?\=[\"' ]*?([0-9.]{1,4})[\"' ]*?/imx", // RegEx pattern to extract the stars score
