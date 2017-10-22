@@ -77,7 +77,7 @@
 	
 		foreach ($review_sites as $get_url)
 		{
-			if ( $get_url['name'] == $worst_relative['name'] )
+			if ( $get_url['name'] == $worst_relative['site'] )
 			{
 				$review_url = $get_url['write_url'];
 			}
